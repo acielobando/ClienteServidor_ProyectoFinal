@@ -9,6 +9,7 @@ package modelo;
  *
  * @author camarona
  */
+import java.io.Serializable;
 public class Cliente {
     
 }
