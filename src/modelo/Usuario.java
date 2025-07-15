@@ -3,16 +3,17 @@ package modelo;
 
  import java.io.Serializable;
 
-public class Usuario implements Serializable{
-    
-     private String usuario;
-    private String contrasena;
-    
+
+
+public class Usuario implements Serializable {
+    private String usuario; // Nombre de usuario
+    private String contrasena; // Contraseña
+
     public Usuario(String usuario, String contrasena) {
-        this.usuario = usuario;
-        this.contrasena = contrasena;
+        this.usuario = usuario; // Asignar usuario
+        this.contrasena = contrasena; // Asignar contraseña
     }
-    
-     public String getUsuario() { return usuario; }
-    public String getContrasena() { return contrasena; }
+
+    public String getUsuario() { return usuario; } // Obtener usuario
+    public String getContrasena() { return contrasena; } // Obtener contraseña
 }
