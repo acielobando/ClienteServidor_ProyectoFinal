@@ -25,7 +25,9 @@ public class AdminMenuForm extends javax.swing.JFrame {
         this.socket = socket;
         this.out = out;
         this.in = in;
-
+        
+        initComponents(); 
+        
         setTitle("Menú Administrador");
         setSize(400, 200);
         setLocationRelativeTo(null);

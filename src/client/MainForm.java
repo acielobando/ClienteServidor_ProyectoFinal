@@ -29,6 +29,10 @@ public class MainForm extends javax.swing.JFrame {
         this.in = in;
         this.nombreUsuario = nombreUsuario;
 
+         
+        
+        initComponents(); 
+        
         setTitle("Menú Principal");
         setSize(400, 200);
         setLocationRelativeTo(null);

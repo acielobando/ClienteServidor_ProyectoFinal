@@ -26,7 +26,7 @@ public class GuardarClienteForm extends javax.swing.JFrame {
         this.socket = socket;
         this.out = out;
         this.in = in;
-
+        initComponents(); 
         setTitle("Registrar Cliente");
         setSize(400, 300);
         setLocationRelativeTo(null);

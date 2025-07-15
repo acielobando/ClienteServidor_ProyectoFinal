@@ -25,7 +25,7 @@ public class RegistrarProductoForm extends javax.swing.JFrame {
         this.socket = socket;
         this.out = out;
         this.in = in;
-
+        initComponents(); 
         setTitle("Registrar Producto");
         setSize(400, 300);
         setLocationRelativeTo(null);

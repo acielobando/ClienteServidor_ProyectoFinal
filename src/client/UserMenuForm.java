@@ -24,7 +24,9 @@ public class UserMenuForm extends javax.swing.JFrame {
         this.out = out;
         this.in = in;
         this.nombreUsuario = nombreUsuario;
-
+        
+        initComponents(); 
+        
         setTitle("Menú Usuario");
         setSize(400, 200);
         setLocationRelativeTo(null);

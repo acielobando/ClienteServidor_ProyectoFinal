@@ -29,7 +29,7 @@ public class CambiarContrasenaForm extends javax.swing.JFrame {
         this.out = out;
         this.in = in;
         this.nombreUsuario = nombreUsuario;
-
+        initComponents(); 
         setTitle("Cambiar Contraseña");
         setSize(400, 300);
         setLocationRelativeTo(null);
