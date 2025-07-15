@@ -1,9 +1,6 @@
 package modelo;
 
-
- import java.io.Serializable;
-
-
+import java.io.Serializable;
 
 public class Usuario implements Serializable {
     private String usuario; // Nombre de usuario
@@ -14,6 +11,15 @@ public class Usuario implements Serializable {
         this.contrasena = contrasena; // Asignar contraseña
     }
 
-    public String getUsuario() { return usuario; } // Obtener usuario
-    public String getContrasena() { return contrasena; } // Obtener contraseña
+    public String getUsuario() {
+        return usuario;
+    } // Obtener usuario
+
+    public String getContrasena() {
+        return contrasena;
+    } // Obtener contraseña
+
+    public void setContrasena(String contrasena) {
+        this.contrasena = contrasena;
+    } // Establecer nueva contraseña
 }
