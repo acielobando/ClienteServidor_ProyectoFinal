@@ -1,15 +1,19 @@
 package modelo;
 
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
-
-/**
- *
- * @author camarona
- */
 import java.io.Serializable;
-public class Cliente {
-    
+public class Cliente extends Usuario implements Serializable {
+    private String id;
+    private String nombre;
+    private String correo;
+
+    public Cliente(String id, String nombre, String correo, String usuario, String contrasena) {
+        super(usuario, contrasena);
+        this.id = id;
+        this.nombre = nombre;
+        this.correo = correo;
+    }
+
+    public String getId() { return id; }
+    public String getNombre() { return nombre; }
+    public String getCorreo() { return correo; }
 }
