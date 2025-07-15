@@ -44,7 +44,7 @@ public class CambiarContrasenaForm extends javax.swing.JFrame {
         try {
             String actual = txtActual.getText();
             String nueva = txtNueva.getText();
-            String confirmar = txtConfirmar.getText();
+            String confirmar = txtConfirmar1.getText();
 
             if (!nueva.equals(confirmar)) {
                 Helper.mostrarMensaje("La nueva contraseña y la confirmación no coinciden.");
@@ -52,7 +52,7 @@ public class CambiarContrasenaForm extends javax.swing.JFrame {
             }
 
             if (nueva.length() < 6 || !nueva.matches(".*[!@#$%^&*()].*")) {
-                Helper.mostrarMensaje("La contraseña debe tener al menos 6 caracteres y un carácter especial.");
+                Helper.mostrarMensaje("La contraseña debe tener al menos 6 caracteres y un carácter especial");
                 return;
             }
 
@@ -91,6 +91,8 @@ public class CambiarContrasenaForm extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         btnCancelar = new javax.swing.JButton();
         txtConfirmar = new javax.swing.JButton();
+        txtConfirmar1 = new javax.swing.JTextField();
+        jLabel4 = new javax.swing.JLabel();
 
         btnSalir.setBackground(new java.awt.Color(169, 205, 229));
         btnSalir.setText("Salir");
@@ -128,6 +130,14 @@ public class CambiarContrasenaForm extends javax.swing.JFrame {
         txtConfirmar.setBackground(new java.awt.Color(169, 205, 229));
         txtConfirmar.setText("Cambiar");
 
+        txtConfirmar1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtConfirmar1ActionPerformed(evt);
+            }
+        });
+
+        jLabel4.setText("Confirmar contraseña:");
+
         javax.swing.GroupLayout panelPrincipalLayout = new javax.swing.GroupLayout(panelPrincipal);
         panelPrincipal.setLayout(panelPrincipalLayout);
         panelPrincipalLayout.setHorizontalGroup(
@@ -144,16 +154,20 @@ public class CambiarContrasenaForm extends javax.swing.JFrame {
                             .addGroup(panelPrincipalLayout.createSequentialGroup()
                                 .addComponent(jLabel2)
                                 .addGap(18, 18, 18)
-                                .addComponent(txtActual, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addComponent(txtActual, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(panelPrincipalLayout.createSequentialGroup()
+                                .addComponent(jLabel4)
+                                .addGap(18, 18, 18)
+                                .addComponent(txtConfirmar1, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(panelPrincipalLayout.createSequentialGroup()
                         .addGap(132, 132, 132)
                         .addComponent(jLabel1))
                     .addGroup(panelPrincipalLayout.createSequentialGroup()
-                        .addGap(88, 88, 88)
+                        .addGap(100, 100, 100)
                         .addComponent(txtConfirmar)
                         .addGap(18, 18, 18)
                         .addComponent(btnCancelar)))
-                .addContainerGap(69, Short.MAX_VALUE))
+                .addContainerGap(49, Short.MAX_VALUE))
         );
         panelPrincipalLayout.setVerticalGroup(
             panelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -168,11 +182,15 @@ public class CambiarContrasenaForm extends javax.swing.JFrame {
                 .addGroup(panelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtNueva, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3))
-                .addGap(38, 38, 38)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(panelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtConfirmar1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel4))
+                .addGap(26, 26, 26)
                 .addGroup(panelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtConfirmar)
                     .addComponent(btnCancelar))
-                .addContainerGap(45, Short.MAX_VALUE))
+                .addContainerGap(82, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -183,7 +201,9 @@ public class CambiarContrasenaForm extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(panelPrincipal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(panelPrincipal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         pack();
@@ -201,6 +221,10 @@ public class CambiarContrasenaForm extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_btnCancelarActionPerformed
 
+    private void txtConfirmar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtConfirmar1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtConfirmar1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -213,9 +237,11 @@ public class CambiarContrasenaForm extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel panelPrincipal;
     private javax.swing.JTextField txtActual;
     private javax.swing.JButton txtConfirmar;
+    private javax.swing.JTextField txtConfirmar1;
     private javax.swing.JTextField txtNueva;
     // End of variables declaration//GEN-END:variables
 }

@@ -3,8 +3,13 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/camarona/Documents/NetBeansProjects/ClienteServidor_ProyectoFinal/src/helper/Helper.java</file>
-            <file>file:/C:/Users/camarona/Documents/NetBeansProjects/ClienteServidor_ProyectoFinal/src/helper/JSystem.java</file>
+            <file>file:/C:/Users/camarona/Documents/NetBeansProjects/ClienteServidor_ProyectoFinal/src/client/CrearFactura.java</file>
+            <file>file:/C:/Users/camarona/Documents/NetBeansProjects/ClienteServidor_ProyectoFinal/src/server/ClientThread.java</file>
+            <file>file:/C:/Users/camarona/Documents/NetBeansProjects/ClienteServidor_ProyectoFinal/src/modelo/Producto.java</file>
+            <file>file:/C:/Users/camarona/Documents/NetBeansProjects/ClienteServidor_ProyectoFinal/src/client/SeleccionarCliente.java</file>
+            <file>file:/C:/Users/camarona/Documents/NetBeansProjects/ClienteServidor_ProyectoFinal/src/modelo/ItemFactura.java</file>
+            <file>file:/C:/Users/camarona/Documents/NetBeansProjects/ClienteServidor_ProyectoFinal/src/modelo/Solicitud.java</file>
+            <file>file:/C:/Users/camarona/Documents/NetBeansProjects/ClienteServidor_ProyectoFinal/src/modelo/Respuesta.java</file>
         </group>
     </open-files>
 </project-private>

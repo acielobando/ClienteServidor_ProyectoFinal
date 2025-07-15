@@ -34,8 +34,9 @@ public class UserMenuForm extends javax.swing.JFrame {
         setContentPane(panelPrincipal);
 
         btnCrearFactura.addActionListener(e -> {
-            // Aquí iría CrearFacturaForm (HU-006+)
-            JOptionPane.showMessageDialog(this, "Funcionalidad Crear Factura en desarrollo.");
+            SeleccionarCliente seleccionarCliente = new SeleccionarCliente(socket, out, in);
+            seleccionarCliente.setVisible(true);
+            this.dispose(); 
         });
 
         btnPerfilUsuario.addActionListener(e -> {

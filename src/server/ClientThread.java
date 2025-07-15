@@ -7,7 +7,8 @@ import java.io.*;
 import java.net.Socket;
 import java.util.HashMap;
 import java.util.Map;
-
+import modelo.Respuesta;
+import modelo.Solicitud;
 public class ClientThread extends Thread {
     private Socket socket;
     private ObjectInputStream in;
@@ -99,4 +100,46 @@ public class ClientThread extends Thread {
         out.writeObject(respuesta);
         out.flush();
     }
+    
+    
+private static final Map<String, Producto> inventario = new HashMap<>();
+static {
+   
+    inventario.put("Laptop",  new Producto("Laptop1","Laptop", 800.0, 10));
+    inventario.put("Mouse",   new Producto("Mouse1","Mouse",  20.0, 50));
+    inventario.put("Teclado", new Producto("Teclado1","Teclado",30.0, 25));
+}
+
+private void procesarSolicitud2(Solicitud solicitud) throws IOException {
+    String tipo = solicitud.getTipo();
+    Object datos = solicitud.getContenido();
+
+    switch (tipo) {
+     
+
+        case "verificar_stock": {
+            Object[] arr = (Object[]) datos;
+            String nombre = (String) arr[0];
+            int cantidad = (int) arr[1];
+
+            Producto p = inventario.get(nombre);
+            if (p == null) {
+                enviarRespuesta(new Respuesta(false, "Producto no encontrado.", null));
+                return;
+            }
+            if (cantidad > p.getCantidad()) {
+                enviarRespuesta(new Respuesta(false,
+                        "Cantidad solicitada excede el stock. Disponible: " + p.getCantidad(), null));
+                return;
+            }
+
+          
+            enviarRespuesta(new Respuesta(true, "Stock disponible.", p));
+            break;
+        }
+
+        // ...
+    }
+}
+
 }
