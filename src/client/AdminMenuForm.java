@@ -4,62 +4,46 @@
  */
 package client;
 
-import helper.Helper;
-import modelo.Solicitud;
-import modelo.Respuesta;
+import helper.JSystem;
 
 import javax.swing.*;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
 
-public class MainForm extends javax.swing.JFrame {
+public class AdminMenuForm extends javax.swing.JFrame {
     
-    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(MainForm.class.getName());
+    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(AdminMenuForm.class.getName());
 
+  
 
     private final Socket socket;
     private final ObjectOutputStream out;
     private final ObjectInputStream in;
-    private final String nombreUsuario;
 
-    public MainForm(Socket socket, ObjectOutputStream out, ObjectInputStream in, String nombreUsuario) {
+    public AdminMenuForm(Socket socket, ObjectOutputStream out, ObjectInputStream in) {
         this.socket = socket;
         this.out = out;
         this.in = in;
-        this.nombreUsuario = nombreUsuario;
 
-        setTitle("Menú Principal");
+        setTitle("Menú Administrador");
         setSize(400, 200);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setContentPane(panelPrincipal);
 
-        btnAdministrador.addActionListener(e -> {
-            if (nombreUsuario.equals("admin")) { // Usuario admin predefinido
-                new AdminMenuForm(socket, out, in).setVisible(true);
-                dispose();
-            } else {
-                Helper.mostrarMensaje("Acceso denegado. Solo administradores pueden entrar aquí.");
-            }
+        btnGuardarCliente.addActionListener(e -> {
+            new GuardarClienteForm(socket, out, in).setVisible(true);
         });
 
-        btnUsuario.addActionListener(e -> {
-            new UserMenuForm(socket, out, in, nombreUsuario).setVisible(true);
-            dispose();
+        btnGestionarInventario.addActionListener(e -> {
+            new RegistrarProductoForm(socket, out, in).setVisible(true);
         });
 
         btnSalir.addActionListener(e -> {
-            if (helper.JSystem.confirmarSalida()) {
-                try {
-                    Solicitud solicitud = new Solicitud("logout", null);
-                    out.writeObject(solicitud);
-                    out.flush();
-                    socket.close();
-                } catch (Exception ex) {
-                    Helper.mostrarMensaje("Error cerrando sesión: " + ex.getMessage());
-                }
-                System.exit(0);
+            if (JSystem.confirmarSalida()) {
+                dispose();
+                new MainForm(socket, out, in, "admin").setVisible(true);
             }
         });
     }
@@ -73,27 +57,27 @@ public class MainForm extends javax.swing.JFrame {
     private void initComponents() {
 
         panelPrincipal = new javax.swing.JPanel();
-        btnAdministrador = new javax.swing.JButton();
-        btnUsuario = new javax.swing.JButton();
+        btnGuardarCliente = new javax.swing.JButton();
+        btnGestionarInventario = new javax.swing.JButton();
         btnSalir = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        btnAdministrador.setBackground(new java.awt.Color(169, 205, 229));
-        btnAdministrador.setText("Administrador");
-        btnAdministrador.addActionListener(new java.awt.event.ActionListener() {
+        btnGuardarCliente.setBackground(new java.awt.Color(169, 205, 229));
+        btnGuardarCliente.setText("Guardar Clientes");
+        btnGuardarCliente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAdministradorActionPerformed(evt);
+                btnGuardarClienteActionPerformed(evt);
             }
         });
 
-        btnUsuario.setBackground(new java.awt.Color(169, 205, 229));
-        btnUsuario.setText("Usuario");
-        btnUsuario.setToolTipText("");
-        btnUsuario.addActionListener(new java.awt.event.ActionListener() {
+        btnGestionarInventario.setBackground(new java.awt.Color(169, 205, 229));
+        btnGestionarInventario.setText("Gestionar Inventario");
+        btnGestionarInventario.setToolTipText("");
+        btnGestionarInventario.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnUsuarioActionPerformed(evt);
+                btnGestionarInventarioActionPerformed(evt);
             }
         });
 
@@ -105,7 +89,7 @@ public class MainForm extends javax.swing.JFrame {
             }
         });
 
-        jLabel1.setText(" Menú Principal");
+        jLabel1.setText(" Menú Administración");
 
         javax.swing.GroupLayout panelPrincipalLayout = new javax.swing.GroupLayout(panelPrincipal);
         panelPrincipal.setLayout(panelPrincipalLayout);
@@ -114,27 +98,27 @@ public class MainForm extends javax.swing.JFrame {
             .addGroup(panelPrincipalLayout.createSequentialGroup()
                 .addGroup(panelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panelPrincipalLayout.createSequentialGroup()
-                        .addGap(142, 142, 142)
-                        .addGroup(panelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(btnAdministrador, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(panelPrincipalLayout.createSequentialGroup()
                         .addGap(161, 161, 161)
                         .addComponent(btnSalir))
                     .addGroup(panelPrincipalLayout.createSequentialGroup()
-                        .addGap(155, 155, 155)
-                        .addComponent(jLabel1)))
-                .addContainerGap(158, Short.MAX_VALUE))
+                        .addGap(139, 139, 139)
+                        .addComponent(jLabel1))
+                    .addGroup(panelPrincipalLayout.createSequentialGroup()
+                        .addGap(131, 131, 131)
+                        .addGroup(panelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btnGuardarCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnGestionarInventario))))
+                .addContainerGap(164, Short.MAX_VALUE))
         );
         panelPrincipalLayout.setVerticalGroup(
             panelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelPrincipalLayout.createSequentialGroup()
                 .addGap(29, 29, 29)
                 .addComponent(jLabel1)
-                .addGap(18, 18, 18)
-                .addComponent(btnAdministrador, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(26, 26, 26)
+                .addComponent(btnGuardarCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btnUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnGestionarInventario, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnSalir)
                 .addContainerGap(52, Short.MAX_VALUE))
@@ -156,13 +140,13 @@ public class MainForm extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnAdministradorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdministradorActionPerformed
+    private void btnGuardarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarClienteActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_btnAdministradorActionPerformed
+    }//GEN-LAST:event_btnGuardarClienteActionPerformed
 
-    private void btnUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUsuarioActionPerformed
+    private void btnGestionarInventarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGestionarInventarioActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_btnUsuarioActionPerformed
+    }//GEN-LAST:event_btnGestionarInventarioActionPerformed
 
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
         // TODO add your handling code here:
@@ -171,11 +155,12 @@ public class MainForm extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
-   
+
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnAdministrador;
+    private javax.swing.JButton btnGestionarInventario;
+    private javax.swing.JButton btnGuardarCliente;
     private javax.swing.JButton btnSalir;
-    private javax.swing.JButton btnUsuario;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel panelPrincipal;
     // End of variables declaration//GEN-END:variables

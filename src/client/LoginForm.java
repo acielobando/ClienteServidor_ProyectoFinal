@@ -43,7 +43,7 @@ public class LoginForm extends javax.swing.JFrame {
                 Helper.mostrarMensaje(respuesta.getMensaje());
 
                 if (respuesta.isExito()) {
-                    new MainForm(socket, out, in).setVisible(true);
+                    new MainForm(socket, out, in, usuario).setVisible(true);
                     dispose();
                 } else {
                     socket.close();

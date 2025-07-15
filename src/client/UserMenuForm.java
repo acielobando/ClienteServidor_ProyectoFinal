@@ -3,19 +3,15 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package client;
-
-import helper.Helper;
-import modelo.Solicitud;
-import modelo.Respuesta;
+import helper.JSystem;
 
 import javax.swing.*;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
-
-public class MainForm extends javax.swing.JFrame {
+public class UserMenuForm extends javax.swing.JFrame {
     
-    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(MainForm.class.getName());
+    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(UserMenuForm.class.getName());
 
 
     private final Socket socket;
@@ -23,46 +19,35 @@ public class MainForm extends javax.swing.JFrame {
     private final ObjectInputStream in;
     private final String nombreUsuario;
 
-    public MainForm(Socket socket, ObjectOutputStream out, ObjectInputStream in, String nombreUsuario) {
+    public UserMenuForm(Socket socket, ObjectOutputStream out, ObjectInputStream in, String nombreUsuario) {
         this.socket = socket;
         this.out = out;
         this.in = in;
         this.nombreUsuario = nombreUsuario;
 
-        setTitle("Menú Principal");
+        setTitle("Menú Usuario");
         setSize(400, 200);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setContentPane(panelPrincipal);
 
-        btnAdministrador.addActionListener(e -> {
-            if (nombreUsuario.equals("admin")) { // Usuario admin predefinido
-                new AdminMenuForm(socket, out, in).setVisible(true);
-                dispose();
-            } else {
-                Helper.mostrarMensaje("Acceso denegado. Solo administradores pueden entrar aquí.");
-            }
+        btnCrearFactura.addActionListener(e -> {
+            // Aquí iría CrearFacturaForm (HU-006+)
+            JOptionPane.showMessageDialog(this, "Funcionalidad Crear Factura en desarrollo.");
         });
 
-        btnUsuario.addActionListener(e -> {
-            new UserMenuForm(socket, out, in, nombreUsuario).setVisible(true);
-            dispose();
+        btnPerfilUsuario.addActionListener(e -> {
+            new CambiarContrasenaForm(socket, out, in, nombreUsuario).setVisible(true);
         });
 
         btnSalir.addActionListener(e -> {
-            if (helper.JSystem.confirmarSalida()) {
-                try {
-                    Solicitud solicitud = new Solicitud("logout", null);
-                    out.writeObject(solicitud);
-                    out.flush();
-                    socket.close();
-                } catch (Exception ex) {
-                    Helper.mostrarMensaje("Error cerrando sesión: " + ex.getMessage());
-                }
-                System.exit(0);
+            if (JSystem.confirmarSalida()) {
+                dispose();
+                new MainForm(socket, out, in, nombreUsuario).setVisible(true);
             }
         });
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -73,27 +58,27 @@ public class MainForm extends javax.swing.JFrame {
     private void initComponents() {
 
         panelPrincipal = new javax.swing.JPanel();
-        btnAdministrador = new javax.swing.JButton();
-        btnUsuario = new javax.swing.JButton();
+        btnPerfilUsuario = new javax.swing.JButton();
+        btnCrearFactura = new javax.swing.JButton();
         btnSalir = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        btnAdministrador.setBackground(new java.awt.Color(169, 205, 229));
-        btnAdministrador.setText("Administrador");
-        btnAdministrador.addActionListener(new java.awt.event.ActionListener() {
+        btnPerfilUsuario.setBackground(new java.awt.Color(169, 205, 229));
+        btnPerfilUsuario.setText("Perfil de Usuario");
+        btnPerfilUsuario.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAdministradorActionPerformed(evt);
+                btnPerfilUsuarioActionPerformed(evt);
             }
         });
 
-        btnUsuario.setBackground(new java.awt.Color(169, 205, 229));
-        btnUsuario.setText("Usuario");
-        btnUsuario.setToolTipText("");
-        btnUsuario.addActionListener(new java.awt.event.ActionListener() {
+        btnCrearFactura.setBackground(new java.awt.Color(169, 205, 229));
+        btnCrearFactura.setText("Crear Factura");
+        btnCrearFactura.setToolTipText("");
+        btnCrearFactura.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnUsuarioActionPerformed(evt);
+                btnCrearFacturaActionPerformed(evt);
             }
         });
 
@@ -105,7 +90,7 @@ public class MainForm extends javax.swing.JFrame {
             }
         });
 
-        jLabel1.setText(" Menú Principal");
+        jLabel1.setText("Menú Principal");
 
         javax.swing.GroupLayout panelPrincipalLayout = new javax.swing.GroupLayout(panelPrincipal);
         panelPrincipal.setLayout(panelPrincipalLayout);
@@ -114,27 +99,27 @@ public class MainForm extends javax.swing.JFrame {
             .addGroup(panelPrincipalLayout.createSequentialGroup()
                 .addGroup(panelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panelPrincipalLayout.createSequentialGroup()
-                        .addGap(142, 142, 142)
-                        .addGroup(panelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(btnAdministrador, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(panelPrincipalLayout.createSequentialGroup()
                         .addGap(161, 161, 161)
                         .addComponent(btnSalir))
                     .addGroup(panelPrincipalLayout.createSequentialGroup()
-                        .addGap(155, 155, 155)
+                        .addGap(131, 131, 131)
+                        .addGroup(panelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(btnPerfilUsuario, javax.swing.GroupLayout.DEFAULT_SIZE, 136, Short.MAX_VALUE)
+                            .addComponent(btnCrearFactura, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addGroup(panelPrincipalLayout.createSequentialGroup()
+                        .addGap(158, 158, 158)
                         .addComponent(jLabel1)))
-                .addContainerGap(158, Short.MAX_VALUE))
+                .addContainerGap(164, Short.MAX_VALUE))
         );
         panelPrincipalLayout.setVerticalGroup(
             panelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelPrincipalLayout.createSequentialGroup()
-                .addGap(29, 29, 29)
+                .addGap(37, 37, 37)
                 .addComponent(jLabel1)
                 .addGap(18, 18, 18)
-                .addComponent(btnAdministrador, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnPerfilUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btnUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnCrearFactura, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnSalir)
                 .addContainerGap(52, Short.MAX_VALUE))
@@ -156,13 +141,13 @@ public class MainForm extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnAdministradorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdministradorActionPerformed
+    private void btnPerfilUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPerfilUsuarioActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_btnAdministradorActionPerformed
+    }//GEN-LAST:event_btnPerfilUsuarioActionPerformed
 
-    private void btnUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUsuarioActionPerformed
+    private void btnCrearFacturaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCrearFacturaActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_btnUsuarioActionPerformed
+    }//GEN-LAST:event_btnCrearFacturaActionPerformed
 
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
         // TODO add your handling code here:
@@ -171,11 +156,11 @@ public class MainForm extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
-   
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnAdministrador;
+    private javax.swing.JButton btnCrearFactura;
+    private javax.swing.JButton btnPerfilUsuario;
     private javax.swing.JButton btnSalir;
-    private javax.swing.JButton btnUsuario;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel panelPrincipal;
     // End of variables declaration//GEN-END:variables
