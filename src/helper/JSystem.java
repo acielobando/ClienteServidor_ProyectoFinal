@@ -1,13 +1,9 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package helper;
+import javax.swing.*;
 
-/**
- *
- * @author camarona
- */
 public class JSystem {
-    
+    public static boolean confirmarSalida() {
+        int opcion = JOptionPane.showConfirmDialog(null, "¿Desea salir del sistema?", "Confirmar salida", JOptionPane.YES_NO_OPTION);
+        return opcion == JOptionPane.YES_OPTION;
+    }
 }
