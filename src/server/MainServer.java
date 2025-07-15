@@ -1,20 +1,18 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Main.java to edit this template
- */
 package server;
+import modelo.*;
+import java.io.*;
+import java.net.*;
 
-/**
- *
- * @author camarona
- */
 public class MainServer {
-
-    /**
-     * @param args the command line arguments
-     */
     public static void main(String[] args) {
-        // TODO code application logic here
+        try (ServerSocket serverSocket = new ServerSocket(12345)) {
+            System.out.println("Servidor esperando conexiones...");
+            while (true) {
+                Socket socket = serverSocket.accept();
+                new ClientThread(socket).start();
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
-    
 }
